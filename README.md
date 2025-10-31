@@ -80,7 +80,7 @@ Feel free to modify `login.html` if you want to personalize your login page.
 
 # Upload Image Incognito
 
-This package now contains a node that contribute to privacy.
+<!-- This package now contains a node that contribute to privacy.
 
 ![Upload Image Incognito node](images/Upload_Image_Incognito.png)
 
@@ -88,7 +88,9 @@ The image will be encrypted and uploaded to the server. The key for decryption i
 
 The image will be automatically deleted by default.
 
-Unlike the default "Load Image" node, where the image is read from disk every time, this node keeps the image in cache and deletes the physical file as soon as the first prompt runs.
+Unlike the default "Load Image" node, where the image is read from disk every time, this node keeps the image in cache and deletes the physical file as soon as the first prompt runs. -->
+
+This is removed due to confliction with the latest version of ComfyUI.
 
 # Free Memory When Leaving
 
