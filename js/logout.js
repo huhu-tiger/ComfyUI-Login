@@ -2,22 +2,36 @@ import { app } from "../../scripts/app.js";
 
 app.registerExtension({
 	name: "Comfy.Login.Logout",
-	init() {},
-	async setup() {
-		await new Promise(resolve => setTimeout(resolve, 500)); // Delay for 0.5 second before appending the Logout button to the menu, ensuring it is added last.
+	commands: [
+		{
+			id: "Comfy.Login.Logout",
+			label: "Logout",
+			menubarLabel: "Logout", // Label shown in menu
+			icon: "mdi mdi-logout", // Optional: logout icon
+			tooltip: "Logout and return to login screen",
+			function: async () => {
+				// Save workflow data before clearing
+				let workflowData = localStorage.getItem('workflow');
 
-		const menu = document.querySelector(".comfy-menu");
+				// Clear all items in localStorage
+				localStorage.clear();
 
-		const logoutButton = document.createElement("button");
-		logoutButton.textContent = "Logout";
-		logoutButton.onclick = () => {
-			let workflowData = localStorage.getItem('workflow'); // Save the workflow data
-			localStorage.clear(); // Clear all items in localStorage
-			localStorage.setItem('workflow', workflowData); // Restore the workflow data
+				// Restore the workflow data
+				localStorage.setItem('workflow', workflowData);
 
-			sessionStorage.clear(); // If you use sessionStorage
-			window.location.href = "/logout"; 
+				// Clear sessionStorage if used
+				sessionStorage.clear();
+
+				// Redirect to logout endpoint
+				window.location.href = "/logout";
+			}
 		}
-		menu.append(logoutButton);
-	},
+	],
+
+	menuCommands: [
+		{
+			path: ['File'], // Top level (or use ['File'] to put it under File menu)
+			commands: ["Comfy.Login.Logout"]
+		}
+	],
 });
